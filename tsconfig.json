@@ -1,0 +1,15 @@
+{
+	"exclude": ["./node_modules/", "./dist/**/*"],
+	"compilerOptions": {
+		"target": "es2016",
+		"outDir": "./dist/",
+		"module": "commonjs",
+		"allowJs": true,
+		"esModuleInterop": true,
+		// "preserveSymlinks": true,
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitAny": true,
+		"strict": true,
+		"jsx": "react-jsx"
+	}
+}
