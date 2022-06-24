@@ -27,7 +27,9 @@ const MyPage = () => {
 						<S.TableHeader>
 							<S.HHNum>No.</S.HHNum>
 							<S.HHDate>일시</S.HHDate>
+							<S.HHAsset>시장 및 운용기간</S.HHAsset>
 							<S.HHResult>결과</S.HHResult>
+							<S.HHDelete>삭제</S.HHDelete>
 						</S.TableHeader>
 						<TSHistory />
 					</S.ResultBox>
