@@ -1,10 +1,7 @@
-import accountReducer from "./slice/account";
 import assetClassReducer from "./slice/assetClass";
 import simulationReducer from "./slice/simulation";
 import modalReducer from "./slice/modal";
 import backSelectionReducer from "./slice/backSelection";
-import pageReducer from "./slice/page";
-import tradingReducer from "./slice/trading";
 
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
@@ -21,13 +18,10 @@ import {
 } from "redux-persist";
 
 const rootReducer = combineReducers({
-	account: accountReducer,
 	assetClass: assetClassReducer,
 	simulation: simulationReducer,
 	modal: modalReducer,
 	backSelection: backSelectionReducer,
-	page: pageReducer,
-	trading: tradingReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

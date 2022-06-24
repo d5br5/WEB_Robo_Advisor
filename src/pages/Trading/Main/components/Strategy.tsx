@@ -1,8 +1,11 @@
-import { Dispatch, FC, memo, SetStateAction } from "react";
-import { Control, FieldValues, UseFormSetValue, UseFormRegister } from "react-hook-form";
+import { FC, memo } from "react";
+import { Control } from "react-hook-form";
 import { Item, MiniTitle, ItemInput, DropdownGrider } from "../styles";
-import { StringOption, priorityItem, prioritySort, priorityTime } from "../../../../config/data/TS";
-import Accordion from "./StrAccordion";
+import {
+	priorityItem,
+	prioritySort,
+	priorityTime,
+} from "../../../../config/data/TS";
 import Dropdown from "../../../../Common/FormInput/DropDown";
 import {
 	StepBody,
@@ -14,23 +17,9 @@ import {
 
 export interface AccordionProps {
 	control: Control;
-	setValue: UseFormSetValue<FieldValues>;
-	register: UseFormRegister<FieldValues>;
-	buyStrs: StringOption[];
-	setBuyStrs: Dispatch<SetStateAction<StringOption[]>>;
-	sellStrs: StringOption[];
-	setSellStrs: Dispatch<SetStateAction<StringOption[]>>;
 }
 
-const Strategy: FC<AccordionProps> = ({
-	control,
-	setValue,
-	register,
-	buyStrs,
-	setBuyStrs,
-	sellStrs,
-	setSellStrs,
-}) => {
+const Strategy: FC<AccordionProps> = ({ control }) => {
 	return (
 		<StepContainer>
 			<TitleContainer>
@@ -38,15 +27,6 @@ const Strategy: FC<AccordionProps> = ({
 				<StepTitle>전략 입력</StepTitle>
 			</TitleContainer>
 			<StepBody>
-				<Accordion
-					control={control}
-					setValue={setValue}
-					register={register}
-					buyStrs={buyStrs}
-					setBuyStrs={setBuyStrs}
-					sellStrs={sellStrs}
-					setSellStrs={setSellStrs}
-				/>
 				<Item>
 					<MiniTitle mt="8px" mb="30px">
 						우선 순위

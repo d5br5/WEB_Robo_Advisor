@@ -1,5 +1,5 @@
-// const base = "http://localhost:3000";
-const base = "http://robo.tmax.co.kr";
+const base = "http://localhost:3000";
+// const base = "http://robo.tmax.co.kr";
 const serverURL = "http://robo.tmax.co.kr:8080";
 // const serverURL = "http://192.168.158.141:8080";
 

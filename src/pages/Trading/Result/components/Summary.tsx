@@ -1,78 +1,70 @@
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { BlueBtn, WhiteBox } from "../../../../styles/result";
 import { useLocation } from "react-router-dom";
-import { getPFResult } from "../../../../api/trading";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store";
-import { AccountState } from "../../../../types/state";
+
 import TradingRatio from "../../../../Common/Chart/Doughnut/TradingRatio";
 import DailyNav from "../../../../Common/Chart/Line/DailyNav";
-import TSSummary, { SumCategory } from "../../../../Common/Chart/Table/TSSummary";
+
+import { sum1 as a1 } from "../../../../data/portfolio/1";
+import { sum1 as a2 } from "../../../../data/portfolio/2";
+import { sum1 as a3 } from "../../../../data/portfolio/3";
+import { sum1 as a4 } from "../../../../data/portfolio/4";
+import { sum1 as a5 } from "../../../../data/portfolio/5";
+
+import { sum2 as b1 } from "../../../../data/portfolio/1";
+import { sum2 as b2 } from "../../../../data/portfolio/2";
+import { sum2 as b3 } from "../../../../data/portfolio/3";
+import { sum2 as b4 } from "../../../../data/portfolio/4";
+import { sum2 as b5 } from "../../../../data/portfolio/5";
+
+import TSSummary from "../../../../Common/Chart/Table/TSSummary";
 
 type LocationState = {
-	pfId: string;
+	idx: number;
 };
-
-interface Sum1Response {
-	dailyNav: {
-		period: string[];
-		nav: number[];
-	};
-	perValue: {
-		[key: string]: number;
-	};
-	ratio: {
-		[key: string]: number;
-	};
-	totalValue: number;
-}
-
-interface Sum2Response {
-	mySimulation: {
-		[key in SumCategory]: number;
-	};
-	benchmark: {
-		[key in SumCategory]: number;
-	};
-}
 
 const Summary = () => {
 	const location = useLocation();
-	const { jwt } = useSelector<RootState, AccountState>((state) => state.account);
-	const { pfId } = location.state as LocationState;
-	const [loading, setLoading] = useState(true);
-	const [response1, setResponse1] = useState<Sum1Response | null>(null);
-	const [response2, setResponse2] = useState<Sum2Response | null>(null);
 
-	useEffect(() => {
-		(async () => {
-			try {
-				const result1 = await getPFResult(pfId, 1, jwt);
-				setResponse1(result1?.data?.data);
-				const result2 = await getPFResult(pfId, 2, jwt);
-				setResponse2(result2?.data?.data);
-				console.log(result2?.data?.data);
-				setLoading(false);
-			} catch (e) {
-				alert("조회 실패. 새로고침 혹은 재로그인 후 진행 부탁드립니다.");
-			}
-		})();
-	}, []);
+	const { idx } = location.state as LocationState;
+
+	const now1 = () => {
+		if (idx === 0) return a1;
+		if (idx === 1) return a2;
+		if (idx === 2) return a3;
+		if (idx === 3) return a4;
+		return a5;
+	};
+
+	const now2 = () => {
+		if (idx === 0) return b1;
+		if (idx === 1) return b2;
+		if (idx === 2) return b3;
+		if (idx === 3) return b4;
+		return b5;
+	};
+
+	const response1 = now1();
+	const response2 = now2();
+
 	return (
 		<WhiteBox>
 			<BlueBtn>Summary</BlueBtn>
-			{!loading && response1 && response2 ? (
-				<>
-					<TradingRatio
-						labels={Object.keys(response1.ratio)}
-						ratios={Object.values(response1.ratio)}
-						values={Object.values(response1.perValue)}
-						total={response1.totalValue}
-					/>
-					<TSSummary my={response2?.mySimulation} benchmark={response2?.benchmark} />
-					<DailyNav periods={response1.dailyNav.period} navs={response1.dailyNav.nav} />
-				</>
-			) : null}
+
+			<TradingRatio
+				labels={Object.keys(response1?.ratio)}
+				ratios={Object.values(response1?.ratio)}
+				values={Object.values(response1?.perValue)}
+				total={response1.totalValue}
+			/>
+			<TSSummary
+				my={response2?.mySimulation}
+				benchmark={response2?.benchmark}
+			/>
+			<DailyNav
+				periods={response1.dailyNav.period}
+				navs={response1.dailyNav.nav}
+			/>
 		</WhiteBox>
 	);
 };

@@ -12,9 +12,10 @@ import {
 
 const Pt3Porfolio: FC<{ simDetail: Simulation }> = ({ simDetail }) => {
 	const [pieIdx, setPieIdx] = useState(0);
-	const filteredStrs = simDetail.strategies.filter((a) => a.name !== "kospi" && a.name !== "snp");
-	console.log(simDetail);
-	console.log(filteredStrs);
+	const filteredStrs = simDetail.strategies.filter(
+		(a) => a.name !== "kospi" && a.name !== "snp"
+	);
+
 	return (
 		<WhiteBox>
 			<BlueBtn>전략별 자산배분 비중</BlueBtn>
@@ -25,13 +26,20 @@ const Pt3Porfolio: FC<{ simDetail: Simulation }> = ({ simDetail }) => {
 			</Advice>
 			<ToggleBtnContainer>
 				{filteredStrs.map((item, i) => (
-					<ToggleBtn key={i} disabled={pieIdx === i} onClick={() => setPieIdx(i)}>
+					<ToggleBtn
+						key={i}
+						disabled={pieIdx === i}
+						onClick={() => setPieIdx(i)}
+					>
 						{item.name.toUpperCase()}
 					</ToggleBtn>
 				))}
 			</ToggleBtnContainer>
 			<ChartContainer>
-				<PieChartPercent chartData={filteredStrs[pieIdx].recommendedPf} label={simDetail.assets} />
+				<PieChartPercent
+					chartData={filteredStrs[pieIdx].recommendedPf}
+					label={simDetail.assets}
+				/>
 			</ChartContainer>
 		</WhiteBox>
 	);
