@@ -1,5 +1,8 @@
 ## 1. 개요
 
+![simulator](https://user-images.githubusercontent.com/40906871/180706515-44108979-795a-40c8-b23e-570c4f80c804.png)
+
+
 ### About
 
 > 한 종목에 투자금을 집중했다가 큰 돈을 잃어본 경험이 있나요?
